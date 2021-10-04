@@ -24,5 +24,9 @@
 
 ## TODO 
 Модифицировать код в соответствии с бумагами: [Wave-Tacotron: Spectrogram-free end-to-end text-to-speech synthesis](https://arxiv.org/pdf/2011.03568.pdf), [Non-Attentive Tacotron: Robust and Controllable Neural TTS Synthesis Including Unsupervised Duration Modeling](https://arxiv.org/pdf/2010.04301.pdf)
+
+
 Тренировать русскоанглийскую модель (в процессе)
+
+
 Сделать дружелюбный интерфейс
