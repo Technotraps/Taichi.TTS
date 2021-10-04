@@ -1,26 +1,27 @@
 """ from https://github.com/keithito/tacotron """
 
 '''
-Cleaners are transformations that run over the input text at both training and eval time.
+Очистители - это преобразования, которые выполняются над входным текстом как во время обучения, так и во время оценки.
+Очистители могут быть выбраны путем передачи списка имен очистителей через запятую в качестве гиперпараметра "cleaners".
+гиперпараметр. Некоторые очистители специфичны для английского языка. Как правило, вы захотите использовать:
+  1. "english_cleaners" для английского текста
+  2. "russian_cleaners" для русского текста
+  2. "transliteration_cleaners" для неанглийского текста, который может быть транслитерирован в ASCII с помощью библиотеки Unidecode ().
+     библиотеки Unidecode (https://pypi.python.org/pypi/Unidecode).
+  3. "basic_cleaners", если вы не хотите транслитерировать (в этом случае вы также должны обновить
+     символы в symbols.py, чтобы они соответствовали вашим данным).
 
-Cleaners can be selected by passing a comma-delimited list of cleaner names as the "cleaners"
-hyperparameter. Some cleaners are English-specific. You'll typically want to use:
-  1. "english_cleaners" for English text
-  2. "transliteration_cleaners" for non-English text that can be transliterated to ASCII using
-     the Unidecode library (https://pypi.python.org/pypi/Unidecode)
-  3. "basic_cleaners" if you do not want to transliterate (in this case, you should also update
-     the symbols in symbols.py to match your data).
+Переведено с помощью www.DeepL.com/Translator (бесплатная версия)
 '''
 
 import re
 from unidecode import unidecode
 from .numbers import normalize_numbers
 
-
-# Regular expression matching whitespace:
+# Регулярное выражение, сопоставляющее пробелы:
 _whitespace_re = re.compile(r'\s+')
 
-# List of (regular expression, replacement) pairs for abbreviations:
+# Список пар (регулярное выражение, замена) для аббревиатур:
 _abbreviations = [(re.compile('\\b%s\\.' % x[0], re.IGNORECASE), x[1]) for x in [
   ('mrs', 'misess'),
   ('mr', 'mister'),
@@ -88,3 +89,8 @@ def english_cleaners(text):
   text = expand_abbreviations(text)
   text = collapse_whitespace(text)
   return text
+def russian_cleaners(text):
+  text = convert_to_ascii(text)
+  text = lowercase(text)
+  # к сожалению мне не удалось найти библиотеку для перевода чисел в слова
+  text = collapse_whitespace(text)
