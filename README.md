@@ -9,9 +9,9 @@
 <path-to-wav-file>|<text-corresponding-to-speech-in-wav>|<speaker-no>|<lang-no>
 ```
 
-```<speaker-no>`` варьируется от 0 до n-1, где n - количество дикторов.```
+```<speaker-no> варьируется от 0 до n-1, где n - количество дикторов.```
 
-```<lang-no>`` от 0 до m-1, где m - количество языков.```
+```<lang-no> от 0 до m-1, где m - количество языков.```
 
 ## Hparams
 ```hparams.training_files, hparams.validation_files``` должны быть установлены на пути к txt файлам из предыдущего раздела.
