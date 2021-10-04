@@ -1,22 +1,19 @@
-""" from https://github.com/keithito/tacotron """
+""" Из https://github.com/keithito/tacotron """
 
 '''
-Defines the set of symbols used in text input to the model.
+Определяет набор символов, используемых при вводе текста в модель.
 
-The default is a set of ASCII characters that works well for English or text that has been run through Unidecode. For other data, you can modify _characters. See TRAINING_DATA.md for details. '''
+По умолчанию используется набор символов ASCII, который хорошо подходит для английского языка или текста, прошедшего через Unidecode. Для других данных вы можете изменить _characters. Подробности см. в TRAINING_DATA.md. '''
 from text import cmudict
 
 _pad        = '_'
 _punctuation = '!\'(),.:;? '
 _special = '-'
-_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 
-#Loop for adding Hindi characters.
-for i in range(2304, 2432) :
-    _letters+=chr(i)
 
-# Prepend "@" to ARPAbet symbols to ensure uniqueness (some are the same as uppercase letters):
+# Добавляйте "@" к символам ARPAbet для обеспечения уникальности (некоторые из них совпадают с прописными буквами):
 _arpabet = ['@' + s for s in cmudict.valid_symbols]
 
-# Export all symbols:
+# Экспорт всех символов:
 symbols = [_pad] + list(_special) + list(_punctuation) + list(_letters) + _arpabet
